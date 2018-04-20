@@ -1,0 +1,37 @@
+<div class="container">
+	<div class="alert alert-success" ng-if="orderMessage">{{ orderMessage }}</div>
+	<section class="row">
+	   	<article class="col-xs-12 col-md-6">
+		 	<!--ROW LEFT-->
+		 	<div class="row" ng-repeat="q in menuItems.response | limitTo: menuItems.response.length /2: 0">
+				<div class="col-sm-3">
+			  		<img class="menu-img-size" src="{{ q.menuimageurl }}" alt="delicious">
+				</div>
+		  		<div class="col-sm-6 label-font">
+					<h4>{{ q.menuname }}</h4>
+					<span>{{ q.menudesc }}</span>
+			  	</div>
+		  		<div class="col-sm-3 label-font">
+					<span>{{ q.menuprice | currency }}</span><br><br>
+					<button ng-show="showOrder" class="btn-success" ng-click="placeOrder(q.menuID);">Order</button>
+			  	</div>
+		 	</div>
+	   </article>
+	   <article class="col-xs-12 col-md-6">
+			<!--ROW LEFT-->
+			<div class="row" ng-repeat="m in menuItems.response | limitTo: menuItems.response.length /2: menuItems.response.length /2">
+				<div class="col-sm-3" ng-show="{{ m.menuname != undefined}}">
+					  <img class="menu-img-size" src="{{ m.menuimageurl }}" alt="delicious">
+				</div>
+				<div class="col-sm-6 label-font" ng-show="{{ m.menuname != undefined}}">
+					<h4>{{ m.menuname }}</h4>
+					<span>{{ m.menudesc }}</span>
+			  	</div>
+				<div class="col-sm-3 label-font" ng-show="{{ m.menuname != undefined}}">
+					<span>{{ m.menuprice | currency }}</span><br><br>
+					<button ng-show="showOrder" class="btn-success" ng-click="placeOrder(m.menuID);">Order</button>
+				</div>
+			</div>
+		</article>
+	</section>
+</div>

@@ -1,0 +1,39 @@
+<div class="container">
+	<div class="alert alert-success" ng-if="removeMessage">{{ removeMessage }}</div>
+
+	<div class="panel panel-primary">
+		<div id="divTotal" class="panel-heading">
+			<span class="font-size-xl label-font">Total Ordered List</span>
+		</div>
+
+		<div class="row" ng-repeat="q in menuItems.response">
+			<div class="col-sm-3">
+				<img class="menu-img-size" src="{{ q.menuimageurl }}" alt="delicious">
+			</div>
+			<div class="col-sm-6 label-font">
+				<h4>{{ q.menuname }}</h4>
+				<span>{{ q.menudesc }}</span>
+			</div>
+			<div class="col-sm-3 label-font">
+				<span>{{ q.menuprice | currency }}</span><br><br>
+				<button class="btn-danger" ng-click="removeCartItem(q.menuID);">Remove</button>
+			</div>
+		</div>
+
+		<div id="divTotal" class="panel-heading text-center">
+			<span class="font-size-xl label-font">Total Ordered Quantity: </span>
+			<span class="font-size-xl text-white">{{ totalQty }} </span>
+			<span class="font-size-xl label-font">Total Amount: </span>
+			<span class="font-size-xl text-white">{{ totalAmt | currency }}</span>
+		</div>
+
+	</div>
+
+	<div class="text-center">
+		<a href="#!checkout" ng-if="haveOrders" class="btn btn-danger" ng-click="checkoutAll();">Checkout
+			<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+		</a>
+	</div>
+
+</div>
+<!-- /.container -->

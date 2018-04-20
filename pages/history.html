@@ -1,0 +1,26 @@
+<div class="container">
+	<div class="alert alert-success" ng-if="removeMessage">{{ removeMessage }}</div>
+
+<div class="table-responsive">          
+  <table class="table" style="background-color: white">
+    <thead>
+      <tr>
+        <th>Booking Date</th>
+        <th>Start Time</th>
+        <th>No. of Attendance</th>
+        <th>Booking Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="q in recordItems.response">
+        <td>{{ q.bookingdate.substring(0, 10) }}</td>
+        <td>{{ q.bookingstarttime }}</td>
+        <td>{{ q.bookingattendance }}</td>
+        <td>{{ q.bookingstatus }}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  
+</div>
+<!-- /.container -->

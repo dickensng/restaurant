@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+/*
+ * Name: NG CHUK FONG DICKNS
+ * Student ID: 17006784G
+ * Description: Team project of COMP5322 Internet Computing and Application
+ *
+*/
+
+*{ margin:0; padding:0}
+
+body {
+    margin-left: auto;
+    background-color: black;
+}
+
+div {
+    padding: 0px;
+    border: 0px;
+    margin: 0;
+    white-space:0;
+}
+
+.div-play-video {
+    margin: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.play-video {
+    width:100%;
+    height:100%
+}
+
+.font-logo {
+    font-size: 30px;
+    color: Orange;
+    vertical-align: middle;
+}
+
+.img-logo-circle {
+    vertical-align: middle;
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+}
+
+.label-font {
+    color:orange;
+}
+
+.error-msg {
+    color:red;
+}
+
+.menu-img-size {
+    width: 100px;
+    height: 100px;
+}
+
+.bootCols{
+    height:100px;
+    margin:0;
+    box-sizing:border-box;
+    padding:5px;
+    border:2px solid black;
+    background-color:black;
+}
+
+.font-size-xl {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.md-datepicker-input[placeholder] {
+    color: black;
+}
+
+.md-datepicker-button md-icon {
+    background-color: white;
+}
+
+md-input-container label {
+    color: orange;
+}
+
+/* When the input is focused */
+md-input-container.md-input-focused label {
+    color: orange;
+}
+
+.md-datepicker-input, .booking-style {
+    background-color: #fff;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
