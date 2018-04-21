@@ -9,9 +9,13 @@
 
 *{ margin:0; padding:0}
 
-body {
+html, body {
     margin-left: auto;
-    background-color: black;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+     -o-background-size: cover;
+    background-size: cover;
+    background-color: black !important;
 }
 
 div {

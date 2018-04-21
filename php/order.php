@@ -1,6 +1,6 @@
 <?php
 //setup the request, you can also use CURLOPT_URL
-$ch = curl_init('http://localhost:4001/cart/addCart?menuID=' . $_GET['menuID']);
+$ch = curl_init('http://localhost:4001/cart/addCart?menuID=' . $_GET['menuID'] . '&uid=' . $_GET['uid']);
 
 // Returns the data/output as a string instead of raw data
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

@@ -172,7 +172,7 @@ dnApp.controller('homeController', function ($scope) {
 
 });
 
-dnApp.controller('mainController', function ($scope, $http, $timeout, UserService) {
+dnApp.controller('mainController', function ($scope, $http, $timeout, $cookies, UserService) {
 	if (UserService.signedin == 'Y') {
 		$scope.showOrder = true;
 	} else {
@@ -190,10 +190,18 @@ dnApp.controller('mainController', function ($scope, $http, $timeout, UserServic
 	});
 
 	$scope.placeOrder = function (OrderedMenuID) {
+		$scope.userid = $cookies.get('userid');
+
+		if ($scope.userid == undefined) {
+			$scope.errorMessage = "Please login!";
+			return;
+		}
+
 		$http({
 			method: "GET",
 			url: "php/order.php",
-			params: { menuID: OrderedMenuID }
+			params: { menuID: OrderedMenuID,
+					  uid: $scope.userid }
 		}).then(function mySuccess(response) {
 			$scope.orderStatus = response.data;
 			$scope.orderMessage = "Order added to cart!";
@@ -206,7 +214,7 @@ dnApp.controller('mainController', function ($scope, $http, $timeout, UserServic
 	};
 });
 
-dnApp.controller('snackController', function ($scope, $http, $timeout, UserService) {
+dnApp.controller('snackController', function ($scope, $http, $timeout, $cookies, UserService) {
 	if (UserService.signedin == 'Y') {
 		$scope.showOrder = true;
 	} else {
@@ -224,10 +232,18 @@ dnApp.controller('snackController', function ($scope, $http, $timeout, UserServi
 	});
 
 	$scope.placeOrder = function (OrderedMenuID) {
+		$scope.userid = $cookies.get('userid');
+
+		if ($scope.userid == undefined) {
+			$scope.errorMessage = "Please login!";
+			return;
+		}
+
 		$http({
 			method: "GET",
 			url: "php/order.php",
-			params: { menuID: OrderedMenuID }
+			params: { menuID: OrderedMenuID,
+					  uid: $scope.userid }
 		}).then(function mySuccess(response) {
 			$scope.orderStatus = response.data;
 			$scope.orderMessage = "Order added to cart!";
@@ -240,7 +256,7 @@ dnApp.controller('snackController', function ($scope, $http, $timeout, UserServi
 	};
 });
 
-dnApp.controller('breakfastController', function ($scope, $http, $timeout, UserService) {
+dnApp.controller('breakfastController', function ($scope, $http, $timeout, $cookies, UserService) {
 	if (UserService.signedin == 'Y') {
 		$scope.showOrder = true;
 	} else {
@@ -258,10 +274,18 @@ dnApp.controller('breakfastController', function ($scope, $http, $timeout, UserS
 	});
 
 	$scope.placeOrder = function (OrderedMenuID) {
+		$scope.userid = $cookies.get('userid');
+
+		if ($scope.userid == undefined) {
+			$scope.errorMessage = "Please login!";
+			return;
+		}
+
 		$http({
 			method: "GET",
 			url: "php/order.php",
-			params: { menuID: OrderedMenuID }
+			params: { menuID: OrderedMenuID,
+					  uid: $scope.userid }
 		}).then(function mySuccess(response) {
 			$scope.orderStatus = response.data;
 			$scope.orderMessage = "Order added to cart!";
@@ -274,7 +298,7 @@ dnApp.controller('breakfastController', function ($scope, $http, $timeout, UserS
 	};
 });
 
-dnApp.controller('beverageController', function ($scope, $http, $timeout, UserService) {
+dnApp.controller('beverageController', function ($scope, $http, $timeout, $cookies, UserService) {
 	if (UserService.signedin == 'Y') {
 		$scope.showOrder = true;
 	} else {
@@ -292,10 +316,18 @@ dnApp.controller('beverageController', function ($scope, $http, $timeout, UserSe
 	});
 
 	$scope.placeOrder = function (OrderedMenuID) {
+		$scope.userid = $cookies.get('userid');
+
+		if ($scope.userid == undefined) {
+			$scope.errorMessage = "Please login!";
+			return;
+		}
+
 		$http({
 			method: "GET",
 			url: "php/order.php",
-			params: { menuID: OrderedMenuID }
+			params: { menuID: OrderedMenuID,
+					  uid: $scope.userid }
 		}).then(function mySuccess(response) {
 			$scope.orderStatus = response.data;
 			$scope.orderMessage = "Order added to cart!";
@@ -308,15 +340,22 @@ dnApp.controller('beverageController', function ($scope, $http, $timeout, UserSe
 	};
 });
 
-dnApp.controller('checkoutController', function ($scope, $rootScope, $http, $timeout, UserService) {
+dnApp.controller('checkoutController', function ($scope, $rootScope, $http, $cookies, $timeout, UserService) {
 	$scope.haveOrders = false;
 	$scope.totalAmt = 0;
 	$scope.totalQty = 0;
 
+	$scope.userid = $cookies.get('userid');
+
+	if ($scope.userid == undefined) {
+		$scope.errorMessage = "Please login!";
+		return;
+	}
+
 	$http({
 		method: "GET",
 		url: "php/get-cart.php",
-		params: { menutype: 'Beverages' }
+		params: { uid: $scope.userid }
 	}).then(function mySuccess(response) {
 		$scope.menuItems = response.data;
 		if ($scope.menuItems.response.length > 0) {
@@ -338,7 +377,8 @@ dnApp.controller('checkoutController', function ($scope, $rootScope, $http, $tim
 		$http({
 			method: "GET",
 			url: "php/remove-cart.php",
-			params: { menuID: OrderedMenuID }
+			params: { menuID: OrderedMenuID,
+					  uid: $scope.userid }
 		}).then(function mySuccess(response) {
 			$scope.orderStatus = response.data;
 			$scope.removeMessage = "Order removed from cart!";
@@ -350,7 +390,8 @@ dnApp.controller('checkoutController', function ($scope, $rootScope, $http, $tim
 				$scope.removeMessage = false;
 				$http({
 					method: "GET",
-					url: "php/get-cart.php"
+					url: "php/get-cart.php",
+					params: { uid: $scope.userid }
 				}).then(function mySuccess(response) {
 					$scope.menuItems = response.data;
 					if ($scope.menuItems.response.length > 0) {
@@ -376,7 +417,8 @@ dnApp.controller('checkoutController', function ($scope, $rootScope, $http, $tim
 	$scope.checkoutAll = function (OrderedMenuID) {
 		$http({
 			method: "GET",
-			url: "php/checkout.php"
+			url: "php/checkout.php",
+			params: { uid: $scope.userid }
 		}).then(function mySuccess(response) {
 			$scope.orderStatus = response.data;
 			$scope.removeMessage = "Checkout successfully!";
@@ -388,7 +430,8 @@ dnApp.controller('checkoutController', function ($scope, $rootScope, $http, $tim
 				
 				$http({
 					method: "GET",
-					url: "php/get-cart.php"
+					url: "php/get-cart.php",
+					params: { uid: $scope.userid }
 				}).then(function mySuccess(response) {
 					$scope.menuItems = response.data;
 					if ($scope.menuItems.response.length > 0) {
