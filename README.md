@@ -7,4 +7,5 @@ URL:
 
 http://localhost/restaurant/
 
+PS: Before access and admin page, you must start the restaurant-api service first.
 
